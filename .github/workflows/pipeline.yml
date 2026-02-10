@@ -10,6 +10,8 @@ jobs:
   build:
     name: Build
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     
     steps:
       - name: Checkout code
@@ -26,6 +28,8 @@ jobs:
     name: Unit Tests (TU)
     runs-on: ubuntu-latest
     needs: build
+    permissions:
+      contents: read
     
     steps:
       - name: Checkout code
@@ -42,6 +46,8 @@ jobs:
     name: Integration Tests (IT)
     runs-on: ubuntu-latest
     needs: unit-tests
+    permissions:
+      contents: read
     
     steps:
       - name: Checkout code
@@ -58,6 +64,8 @@ jobs:
     name: Deploy
     runs-on: ubuntu-latest
     needs: integration-tests
+    permissions:
+      contents: read
     
     steps:
       - name: Checkout code
@@ -74,6 +82,8 @@ jobs:
     name: Sonar Analysis
     runs-on: ubuntu-latest
     needs: deploy
+    permissions:
+      contents: read
     
     steps:
       - name: Checkout code
