@@ -23,6 +23,9 @@ jobs:
           echo "Step 1: Build"
           echo "Building the Spring Boot application..."
           echo "========================================="
+          echo ""
+          echo "✓ Build completed successfully"
+          echo "✓ Generated: daggerfall-1.0.0.jar (45.2 MB)"
 
   unit-tests:
     name: Unit Tests (TU)
@@ -41,6 +44,11 @@ jobs:
           echo "Step 2: Unit Tests (TU)"
           echo "Running unit tests..."
           echo "========================================="
+          echo ""
+          echo "✓ All tests passed: 123998750 / 123998750"
+          echo "✓ Ca fait beaucoup la nan ?"
+          echo "✓ Coverage: 85%"
+          echo "✓ Duration: 12.3s"
 
   integration-tests:
     name: Integration Tests (IT)
@@ -59,39 +67,57 @@ jobs:
           echo "Step 3: Integration Tests (IT)"
           echo "Running integration tests..."
           echo "========================================="
-
-  deploy:
-    name: Deploy
-    runs-on: ubuntu-latest
-    needs: integration-tests
-    permissions:
-      contents: read
-    
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-      
-      - name: Deploy step
-        run: |
-          echo "========================================="
-          echo "Step 4: Deploy"
-          echo "Deploying the application..."
-          echo "========================================="
+          echo ""
+          echo "✓ All tests passed: 9001 / 9001"
+          echo "Look above, it's over 9 thousand! "
+          echo "✓ Database tests: OK"
+          echo "✓ API tests: OK"
+          echo "✓ Duration: 45.7s"
 
   sonar:
     name: Sonar Analysis
     runs-on: ubuntu-latest
-    needs: deploy
+    needs: integration-tests
     permissions:
       contents: read
-    
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
-      
+
       - name: Sonar step
         run: |
           echo "========================================="
-          echo "Step 5: Sonar"
+          echo "Step 4: Sonar"
           echo "Running SonarQube analysis..."
           echo "========================================="
+          echo ""
+          echo "✓ Quality Gate: PASSED"
+          echo "✓ Bugs: 0"
+          echo "✓ Vulnerabilities: 0"
+          echo "✓ Code Smells: 12"
+          echo "✓ Coverage: 85.2%"
+          echo "✓ Duplications: 2.1%"
+
+  deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+    needs: sonar
+    permissions:
+      contents: read
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Deploy step
+        run: |
+          echo "========================================="
+          echo "Step 5: Deploy"
+          echo "Deploying the application..."
+          echo "========================================="
+          echo ""
+          echo "✓ Deployment completed successfully"
+          echo "✓ Environment: production"
+          echo "✓ Version: 1.0.0"
+          echo "✓ Status: RUNNING"
