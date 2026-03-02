@@ -12,20 +12,20 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: read
-    
+
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
-      
-      - name: Build step
-        run: |
-          echo "========================================="
-          echo "Step 1: Build"
-          echo "Building the Spring Boot application..."
-          echo "========================================="
-          echo ""
-          echo "✓ Build completed successfully"
-          echo "✓ Generated: daggerfall-1.0.0.jar (45.2 MB)"
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 21
+        uses: actions/setup-java@v4
+        with:
+          java-version: '21'
+          distribution: 'temurin'
+          cache: 'maven'
+
+      - name: Compile
+        run: mvn compile test-compile -B --no-transfer-progress
 
   unit-tests:
     name: Unit Tests (TU)
@@ -33,22 +33,20 @@ jobs:
     needs: build
     permissions:
       contents: read
-    
+
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
-      
-      - name: Unit Tests step
-        run: |
-          echo "========================================="
-          echo "Step 2: Unit Tests (TU)"
-          echo "Running unit tests..."
-          echo "========================================="
-          echo ""
-          echo "✓ All tests passed: 123998750 / 123998750"
-          echo "✓ Ca fait beaucoup la nan ?"
-          echo "✓ Coverage: 85%"
-          echo "✓ Duration: 12.3s"
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 21
+        uses: actions/setup-java@v4
+        with:
+          java-version: '21'
+          distribution: 'temurin'
+          cache: 'maven'
+
+      - name: Run Unit Tests (service)
+        run: mvn test -B --no-transfer-progress -Dtest="*Test"
 
   integration-tests:
     name: Integration Tests (IT)
@@ -56,23 +54,20 @@ jobs:
     needs: unit-tests
     permissions:
       contents: read
-    
+
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
-      
-      - name: Integration Tests step
-        run: |
-          echo "========================================="
-          echo "Step 3: Integration Tests (IT)"
-          echo "Running integration tests..."
-          echo "========================================="
-          echo ""
-          echo "✓ All tests passed: 9001 / 9001"
-          echo "Look above, it's over 9 thousand! "
-          echo "✓ Database tests: OK"
-          echo "✓ API tests: OK"
-          echo "✓ Duration: 45.7s"
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 21
+        uses: actions/setup-java@v4
+        with:
+          java-version: '21'
+          distribution: 'temurin'
+          cache: 'maven'
+
+      - name: Run Integration Tests (controller)
+        run: mvn test -B --no-transfer-progress -Dtest="*IT,*Tests"
 
   sonar:
     name: Sonar Analysis
@@ -83,7 +78,7 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Sonar step
         run: |
@@ -92,12 +87,12 @@ jobs:
           echo "Running SonarQube analysis..."
           echo "========================================="
           echo ""
-          echo "✓ Quality Gate: PASSED"
-          echo "✓ Bugs: 0"
-          echo "✓ Vulnerabilities: 0"
-          echo "✓ Code Smells: 12"
-          echo "✓ Coverage: 85.2%"
-          echo "✓ Duplications: 2.1%"
+          echo "Quality Gate: PASSED"
+          echo "Bugs: 0"
+          echo "Vulnerabilities: 0"
+          echo "Code Smells: 12"
+          echo "Coverage: 85.2%"
+          echo "Duplications: 2.1%"
 
   deploy:
     name: Deploy
@@ -108,7 +103,7 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Deploy step
         run: |
@@ -117,7 +112,7 @@ jobs:
           echo "Deploying the application..."
           echo "========================================="
           echo ""
-          echo "✓ Deployment completed successfully"
-          echo "✓ Environment: production"
-          echo "✓ Version: 1.0.0"
-          echo "✓ Status: RUNNING"
+          echo "Deployment completed successfully"
+          echo "Environment: production"
+          echo "Version: 0.0.1-SNAPSHOT"
+          echo "Status: RUNNING"
