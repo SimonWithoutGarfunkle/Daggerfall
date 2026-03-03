@@ -54,8 +54,15 @@ public class Pipeline {
             throws InterruptedException, ExecutionException, DaggerQueryException {
         return dag().container()
                 .from("alpine:latest")
-                .withExec(List.of("sh", "-c",
-                        "echo 'Quality Gate: PASSED' && echo 'Bugs: 0' && echo 'Coverage: 85%'"))
+                .withExec(List.of("sh", "-c", String.join(" && ",
+                        "echo '=== Sonar Analysis ==='",
+                        "echo 'Running analysis...'",
+                        "sleep 1",
+                        "echo 'Quality Gate: PASSED'",
+                        "echo 'Bugs: 0'",
+                        "echo 'Coverage: 85%'",
+                        "echo 'Analysis complete.'"
+                )))
                 .stdout();
     }
 
