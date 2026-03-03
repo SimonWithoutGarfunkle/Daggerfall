@@ -1,0 +1,8 @@
+{
+  "name": "pipeline",
+  "engineVersion": "v0.19.10",
+  "sdk": {
+    "source": "java"
+  },
+  "source": "ci"
+}
