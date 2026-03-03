@@ -15,6 +15,7 @@ import java.util.concurrent.ExecutionException;
 @Object
 public class Pipeline {
 
+    //Useless counter: 2
     private static final String MAVEN_IMAGE = "maven:3.9-eclipse-temurin-21";
 
     private Container mavenContainer(Directory source) {
@@ -72,7 +73,7 @@ public class Pipeline {
         return dag().container()
                 .from("alpine:latest")
                 .withExec(List.of("sh", "-c",
-                        "echo 'Deployment completed' && echo 'Status: RUNNING'"))
+                        "echo '=== Starting Deploy ===' && echo 'Deployment completed' && echo 'Status: RUNNING'"))
                 .stdout();
     }
 
