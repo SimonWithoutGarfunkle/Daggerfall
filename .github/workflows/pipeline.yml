@@ -15,7 +15,7 @@ jobs:
       - uses: dagger/dagger-for-github@v8.3.0
         with:
           version: "v0.19.10"
-          args: call build --source=.
+          args: build --source=.
 
   unit-tests:
     name: Unit Tests (TU)
@@ -26,7 +26,7 @@ jobs:
       - uses: dagger/dagger-for-github@v8.3.0
         with:
           version: "v0.19.10"
-          args: call unit-tests --source=.
+          args: unit-tests --source=.
 
   integration-tests:
     name: Integration Tests (IT)
@@ -37,7 +37,7 @@ jobs:
       - uses: dagger/dagger-for-github@v8.3.0
         with:
           version: "v0.19.10"
-          args: call integration-tests --source=.
+          args: integration-tests --source=.
 
   sonar:
     name: Sonar Analysis
@@ -48,7 +48,7 @@ jobs:
       - uses: dagger/dagger-for-github@v8.3.0
         with:
           version: "v0.19.10"
-          args: call sonar --source=.
+          args: sonar --source=.
 
   deploy:
     name: Deploy
@@ -59,4 +59,4 @@ jobs:
       - uses: dagger/dagger-for-github@v8.3.0
         with:
           version: "v0.19.10"
-          args: call deploy --source=.
+          args: deploy --source=.
