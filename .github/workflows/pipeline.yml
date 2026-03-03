@@ -2,7 +2,7 @@ name: Java Spring Boot Pipeline
 
 on:
   push:
-    branches: [ main, master, 2-bg-au-tremplin ]
+    branches: [ main, master, 2-bg-au-tremplin, dagger-java-sdk ]
   pull_request:
     branches: [ main, master ]
 
