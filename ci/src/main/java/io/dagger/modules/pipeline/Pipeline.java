@@ -15,7 +15,7 @@ import java.util.concurrent.ExecutionException;
 @Object
 public class Pipeline {
 
-    //Useless counter: 5
+    //Useless counter: 6
     private static final String MAVEN_IMAGE = "maven:3.9-eclipse-temurin-21";
 
     private Container mavenContainer(Directory source) {
